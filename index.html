@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/8ccde7bc23.js" crossorigin="anonymous"></script>
+
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <div id = "toast">
+            <!-- Success -->
+            <!-- <div class="toast toast--success">
+                <div class="toast__icon">
+                    <i class="fa-solid fa-circle-check"></i>
+                </div>
+                <div class="toast__body">
+                    <h3 class="toast__title">
+                        Success
+                    </h3>
+                    <p class="toast__msg">
+                        Máy vi tính kết nối intenet(Windows, Ubuntu hoặc MacOS)
+                    </p>
+                </div>
+                <div class="toast__close">
+                    <i class="fa-solid fa-circle-xmark"></i>
+                </div>
+            </div> -->
+        </div>
+        <div id = "btn">   
+            <div class="btn btn--success">Show Success Toast</div>
+            <div class="btn btn--error">Show Error Toast</div>
+            <!-- <div class="btn btn--warning">Show Warning Toast</div>
+            <div class="btn btn--info">Show Info Toast</div> -->
+        </div>
+
+        <script>
+            const main = document.getElementById('toast');
+            function toast({title,messages,type}) {
+                const toast = document.createElement('div');
+                toast.classList.add('toast',`toast--${type}`);
+                toast.innerHTML = `
+                        <div class="toast__icon">
+                            <i class="fa-solid fa-circle-check"></i>
+                        </div>
+                        <div class="toast__body">
+                            <h3 class="toast__title">
+                                ${title}
+                            </h3>
+                            <p class="toast__msg">
+                                ${messages}
+                            </p>
+                        </div>
+                        <div class="toast__close">
+                            <i class="fa-solid fa-circle-xmark"></i>
+                        </div>
+                `;
+                main.appendChild(toast);
+                setTimeout(function() {
+                    main.removeChild(toast);
+                },4000);
+            }
+            const arrayToast = [
+                {
+                    messages: 'Chúc mừng bạn đăng ký thành công!',
+                    title: 'Thành Công',
+                    type: 'success'
+                },
+                {
+                    title: 'Thất Bại',
+                    messages: 'Xin chia buồn bạn đăng ký thất bại!',
+                    type: 'error'
+                }];
+            const btn = document.querySelectorAll('#btn div');
+            btn.forEach(function(value,index) {
+                const str = value.innerHTML.toLowerCase();
+                value.onclick = function() {
+                    for (const iterator of arrayToast) {
+                        if(str.includes(iterator.type)) {
+                            toast(iterator);
+                        }
+                    }
+                }
+            });
+        </script>
+    </div>
+</body>
+</html>
